@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎来到仓库管理系统</title>
+    <link rel="stylesheet" href="{% static 'css/semantic.css' %}" media="screen" title="no title" charset="utf-8">
+</head>
+<body style="background: url({% static 'images/login.jpg' %});background-size: cover;">
+    <h1 style="position:absolute; top:5%; right: 40%;" ><big>仓库管理系统</big></h1>
+    <div class="ui img">
+        <a href="http://www.baidu.com/" target="_blank">
+            <img src="{% static 'images/schoolLogo.png' %}" class="ui img " style="position: absolute;top: 3%;left: 1%;">
+        </a>
+    </div>
+    <div class="ui bottom">
+        <a href="/admin" target="_blank">
+            <button  class="ui red submit button" style="position: absolute;top: 3%;left: 90%;">管理员入口</button>
+        </a>
+    </div>
+    <!--<div class="ui bottom">-->
+        <!--<a href="/admin" target="_blank">-->
+            <!--<button  class="ui red submit button" style="position: absolute;top: 3%;left: 80%;">新用户注册</button>-->
+        <!--</a>-->
+    <!--</div>-->
+    {% if messages %}
+       <ul class=" ui red header messages" style="background-color: ghostwhite; position: absolute;top: 65%;left: 80%;">
+           {% for message in messages %}
+           <P {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</P>
+           {% endfor %}
+       </ul>
+    {% endif %}
+   <div class="ui center segment"
+                style=" min-height: 330px;
+                opacity: 0.8;
+                background-color: ghostwhite;
+                width:315px !important;
+                border:rgba(255, 0, 0, 0);
+                position: absolute;
+                left: 50%;
+                top:40%;
+                transform: translate(-50%,-50%);">
+       <div class="ui center content login">
+           <div class="ui header">
+               <h2 class="ui red">欢迎注册</h2>
+               <form action="" method="POST" style="position: absolute;top: 10%;left: 5%;" >
+                   {% csrf_token %}
+                   <ul>
+                        <li>
+                            <label>用户名:</label>
+                            <div class="ui input">
+                                <input type="text" name="user_name" id="user_name" value="{{ username }}" style="padding: 3px;">
+                            </div>
+                        </li>					
+                        <li>
+                            <label>密码:</label>
+                            <div class="ui input">
+                                <input type="password" name="pwd" id="pwd" style="padding: 3px">
+                            </div>
+                            
+                        </li>
+                        <li>
+                            <label>电话号码:</label>
+                            <div class="ui input">
+                                <input type="tel" name="tel" id="tel" style="padding:3px;">
+                            </div>
+                        </li>
+                        <li>
+                            <label>邮箱:</label>
+                            <div class="ui input">
+                                    <input type="email" name="email" id="email" style="padding:3px;">
+                            </div>
+                        </li>
+
+                            <div class="ui input">
+                                <input type="submit" value="注 册" name="" style="magin-top:15px; margin-left:70px">
+                            </div>
+                        <!-- </li>
+                        <li class="reg">
+                            <input type="submit" value="登 录" name="">
+                        </li> -->
+                        {{ errmsg }}
+                    </ul>			
+               </form>
+           </div>
+       </div>
+   </div>
+
+   <div class="ui header" style="position: absolute; top: 85%;left: 40%;">
+       <p>致谢Semantic，Django开源框架。<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        POWERED BY PYTHON
+       </p>
+   </div>
+
+</body>
+</html>

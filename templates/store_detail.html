@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎来到仓库管理系统</title>
+    <link rel="stylesheet" href="{% static 'css/semantic.css' %}" media="screen" title="no title" charset="utf-8">
+</head>
+<body style="background: url({% static 'images/user_bg.jpg' %}); background-size: cover">
+    <!-- 用户信息栏 -->
+    <div class="ui segment" style=" min-height: 400px;
+                    opacity: 0.8;
+                    background-color: ghostwhite;
+                    width: 220px !important;
+                    border:rgba(255, 0, 0, 0);
+                    position: absolute;
+                    left: 10%;
+                    top:32%;
+                    transform: translate(-50%,-50%);">
+        <div class="ui image">
+                <i class="ui massive user icon"></i>
+                <h3 class="ui center header">
+                    姓名:&nbsp&nbsp&nbsp {{request.user.username}}
+                </h3>
+                <h3 class="ui center">
+                    性别:&nbsp&nbsp&nbsp<i class="man icon"></i>
+                </h3>
+                <h3 class="ui center">
+                    职位:&nbsp&nbsp&nbsp{{ request.user.job }}
+                </h3>
+                <h3 class="ui center">
+                    TEL:&nbsp&nbsp&nbsp{{request.user.tel}}
+                </h3>
+                <br>
+                <a href="/admin/gadmin/user/" class="ui center red button" >更改信息</a>
+        </div>
+    </div>
+    <!-- 右边的显示部分 -->
+     <div class="ui segment" style=" min-height: 150px;
+                    opacity: 0.8;
+                    background-color: ghostwhite;
+                    width: 220px !important;
+                    border:rgba(255, 0, 0, 0);
+                    position: absolute;
+                    left: 10%;
+                    top:77%;
+                    transform: translate(-50%,-50%);">
+            <div class="ui card ui segment" style="padding:20px; margin-top:20px;margin-right:10px;">
+                <div class="card">
+                    <div class="content">
+                        <div class="header"><h4>仓库名称:{{ store.name }}</h4></div>
+                        <div class="description">描述信息：{{ store.desc }}</div>
+                        <div class="description">仓库地址：{{ store.addr }}</div>
+                        <div class="description">最大库存：{{ store.max_store  }}</div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div class="ui segment" style=" height: 600px;
+                    opacity: 0.8;
+                    background-color: ghostwhite;
+                    width: 840px !important;
+                    border:rgba(255, 0, 0, 0);
+                    position: absolute;
+                    left:59%;
+                    top:45%;
+                    transform: translate(-50%,-50%);
+                    overflow: scroll;
+                    ">
+        {% for g in goods %}
+    <div class="ui unstackable items">
+        <div class="item">
+            <div class="image">
+                <img src="{{ g.image.url }}" width=300px>
+            </div>
+            <div class="content">
+                <a class="header"><h1>{{ g.name }}</h1></a>
+                <div class="meta">
+                    <span>Description</span>
+                </div>
+                <div class="description">
+                    <p>{{ g.desc }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    </div>

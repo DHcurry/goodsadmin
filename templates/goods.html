@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎来到仓库管理系统</title>
+    <link rel="stylesheet" href="{% static 'css/semantic.css' %}" media="screen" title="no title" charset="utf-8">
+</head>
+<body style="background: url({% static 'images/user_bg.jpg' %}); background-size: cover">
+    <div class="ui segment" style=" min-height: 400px;
+                    opacity: 0.8;
+                    background-color: ghostwhite;
+                    width: 220px !important;
+                    border:rgba(255, 0, 0, 0);
+                    position: absolute;
+                    left: 10%;
+                    top:34%;
+                    transform: translate(-50%,-50%);">
+        <div class="ui image">
+                <i class="ui massive user icon"></i>
+                <h3 class="ui center header">
+                    姓名:&nbsp&nbsp&nbsp {{request.user.username}}
+                </h3>
+                <h3 class="ui center">
+                    性别:&nbsp&nbsp&nbsp<i class="man icon"></i>
+                </h3>
+                <h3 class="ui center">
+                    职位:&nbsp&nbsp&nbsp{{ request.user.job }}
+                </h3>
+                <h3 class="ui center">
+                    TEL:&nbsp&nbsp&nbsp{{request.user.tel}}
+                </h3>
+                <br>
+                <a href="/admin/gadmin/user/" class="ui center red button" >更改信息</a>
+        </div>
+    </div>
+    <div class="ui segment" style=" height: 600px;
+                    opacity: 0.8;
+                    background-color: ghostwhite;
+                    width: 500px !important;
+                    border:rgba(255, 0, 0, 0);
+                    position: relative;
+                    left:480px;
+                    top:310px;
+                    transform: translate(-50%,-50%);
+                    overflow: scroll;
+                    ">
+        <div style="margin-left:100px">
+            <table>
+             {% for s in goods %}
+            <div class="ui link card" style="margin-top:10px; padding: 10px;">
+                <div class="card" style="padding:10px;">
+                    <div class="image" style="margin-left:45px">
+                        <img src="{{ s.image.url }}" width="150">
+                    </div>
+                    <div class="content">
+                        <div class="header"><h3><a href="{{ s.id }}">名称：{{ s.name }}</a></h3></div>
+                        <div class="mete">
+                            <a>分类：{{ s.goodstype }}</a>
+                        </div>
+                        <div class="description">描述：{{ s.desc }}</div>
+                        <br>
+                    </div>
+                    <div class="extra content">
+                        <span class="right floated">入库时间：{{ s.create_time }} </span>
+                </div>
+            </div>
+            {% endfor %}
+            </table>
+            </div>
+        </div>
+    <form herf="" method="get" class="ui very large icon input" style="position:absolute; top:4%;right:5%">
+            <input type="text" name="query" placeholder="请输入想要搜索的名">
+            <button class="ui button">Search</button>
+    </form>
+</body>
+</html>

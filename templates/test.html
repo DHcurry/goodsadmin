@@ -1,0 +1,22 @@
+{% autoescape on %}
+    这个是第一行 第二<br>
+    第三
+{% endautoescape %}
+{% for val in va %}
+    <li>{{ val }}</li>
+{% endfor %}
+
+{% if va|length >= 4 %}
+就打印这个
+{% else %}
+english
+{% endif %}
+
+{% for v in va %}
+<li>{{ v }}</li>
+{% endfor %}
+{{ goods }}
+{% for g in goods %}
+ {{ g.desc }}<br>
+<img src="{{ g.image.url }}">
+{% endfor %}

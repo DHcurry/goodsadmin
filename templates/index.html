@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎来到仓库管理系统</title>
+    <link rel="stylesheet" href="{% static 'css/semantic.css' %}" media="screen" title="no title" charset="utf-8">
+</head>
+<body style="background: url({% static 'images/user_bg.jpg' %}); background-size: cover">
+    <div class="ui contain">
+                <!--菜单栏部分-->
+        <div class="ui eight item menu" style="background-color: white;height: 80px;opacity: 0.7;">
+            <a href="www.baidu.com" class="item">
+                <img class="ui left image" src="{% static 'images/SchoolLogo.png' %}">
+            </a>
+            <div class="item">
+                <a href="/gadmin/store/" methods="get" class="ui {{ store_inver }} primary blue button">仓库信息查询</a>
+            </div>
+            <div class="item">
+                <a href="/gadmin/goods/" methods="get" class="ui {{ goods_inver }} primary blue button">货物信息查询</a>
+            </div>
+            <div class="item">
+                <a herf="/gadmin/typeinfo/" methods="get" class="ui {{ goods_inver }} primary blue button">分类信息查询</a>
+
+            </div>
+
+            <!--<div class="item">-->
+                <!--<a href="?query=storage" methods="get" class="ui {{ storage_inver }} primary blue button">库存信息查询</a>-->
+            <!--</div>-->
+            <div class="item">
+                <a href="/gadmin/logout/" class="ui  primary red button">退出系统</a>
+            </div>
+
+            <div class="item">
+                <a href="/admin/" methods="get" class="ui primary red button">后台管理</a>
+            </div>
+    </div>
+                <!--左侧个人基础信息segment-->
+        <div class="ui segment" style=" min-height: 400px;
+                    opacity: 0.8;
+                    background-color: ghostwhite;
+                    width: 220px !important;
+                    border:rgba(255, 0, 0, 0);
+                    position: absolute;
+                    left: 10%;
+                    top:53%;
+                    transform: translate(-50%,-50%);">
+            <div class="ui image">
+                <i class="ui massive user icon"></i>
+                <h3 class="ui center header">
+                    姓名:&nbsp&nbsp&nbsp {{request.user.username}}
+                </h3>
+                <h3 class="ui center">
+                    性别:&nbsp&nbsp&nbsp<i class="man icon"></i>
+                </h3>
+                <h3 class="ui center">
+                    职位:&nbsp&nbsp&nbsp{{ request.user.job }}
+                </h3>
+                <h3 class="ui center">
+                    TEL:&nbsp&nbsp&nbsp{{request.user.tel}}
+                </h3>
+                <br>
+                <a href="/admin/gadmin/user/" class="ui center red button" >更改信息</a>
+            </div>
+        </div>
+        <!--最近更新的显示 -->
+    <div class="ui right segment" style="background-color: ghostwhite; opacity: 0.9; width: 50%;margin-top: 5.8em;left: 20%; min-height: 400px;">
+        <div class="ui three item menu">
+          <a class="active red item"><big>最近更新</big></a>
+        </div>
+            <div class="ui list" >
+                {% for g in goods %}
+                <div class="item">
+                    <img class="ui avatar image" src="{{ g.image.url }}">
+                    <div class="content">
+                        <a class="header"><h3>{{ g.name }}</h3></a>
+                        <div class="description">所属仓库：{{ g.store }}</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+    </div>
+</div>
+    <!-- 分类信息区 -->
+    <div class="ui right segment" style="background-color: ghostwhite; opacity: 0.9; width:29%; position: absolute; left:70.4%; top:22.3%; min-height: 400px;" >
+            <div class="ui three item menu">
+                <a class="active red item"><big>分类信息</big></a>
+            </div>
+            <div class="ui list">
+                    {% for ty in type %}
+                    <div class="item">
+                        <img class="ui avatar image" src="{{ ty.image.url }}" width="100">
+                        <div class="content">
+                            <a class="header"><h3>{{ ty.name }}</h3></a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+    </div>
+
+            <!-- <form herf="" method="get" class="ui very large icon input">
+                <input type="text" name="query" placeholder="请输入想要搜索的货物名">
+                <button class="ui button">Search</button>
+            </form> -->
+</body>
+</html>
